@@ -1,0 +1,30 @@
+.userDetailContainer {
+  padding: 20px;
+}
+
+.userDetail {
+  display: flex;
+  margin: auto;
+  gap: 20px;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+  border: 1px solid;
+  width: 400px;
+  padding: 20px;
+  min-height: 490px;
+}
+
+.itemContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.labelContainer {
+  font-weight: bold;
+  padding-right: 20px;
+}
+
+.valueContainer {
+  font-size: 20px;
+}

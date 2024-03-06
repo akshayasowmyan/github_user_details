@@ -19,22 +19,6 @@ const UserDetails = () => {
   }, []);
   return (
     <UserSpecificDetails data={data} />
-    // <Table>
-    //   <TableBody>
-    //       <TableRow key={data.id}>
-    //         <TableCell style={{ width: '100px' }}><Avatar src={data.avatar_url} /></TableCell>
-    //         <TableCell>{data.name || '-'}</TableCell>
-    //         <TableCell>{data.email || '-'}</TableCell>
-    //         <TableCell>{data.company || '-'}</TableCell>
-    //         <TableCell>{data.location || '-'}</TableCell>
-    //         <TableCell>{data.followers || '-'}</TableCell>
-    //         <TableCell>{data.following || '-'}</TableCell>
-    //         <TableCell>{data.public_repos || '-'}</TableCell>
-    //         <TableCell>{data.twitter_username || '-'}</TableCell>
-    //         <TableCell>{data.blog || '-'}</TableCell>
-    //       </TableRow>
-    //   </TableBody>
-    // </Table>
   );
 }
 

@@ -1,20 +1,31 @@
-import React from 'react';
-import Avatar from '@mui/material/Avatar';
+import React, { useMemo } from 'react';
+import './style.css';
+import UserAvatar from '../../atoms/UserAvatar';
 
 const UserSpecificDetails = ({ data }) => {
+  const detailItem = useMemo(() => {
+    return [
+      { label: 'Email:', value: data.email || '-' },
+      { label: 'Company:', value: data.company || '-' },
+      { label: 'Location:', value: data.location || '-' },
+      { label: 'No. of followers:', value: data.followers || '-' },
+      { label: 'No. of following:', value: data.following || '-' },
+      { label: 'No. of public repositories:', value: data.public_repos || '-' },
+      { label: 'Twitter Handle:', value: data.twitter_username || '-' },
+      { label: 'Blog:', value: data.blog || '-' },
+    ];
+  }, [data]);
   return (
-    <div>
-      <h2>User Details:</h2>
-      <li><Avatar alt={data.login} src={data.avatar_url} /></li>
-        <li><strong>Name:</strong> {data.name || '-'}</li>
-        <li><strong>Email:</strong> {data.email || '-'}</li>
-        <li><strong>Company:</strong> {data.company || '-'}</li>
-        <li><strong>Location:</strong> {data.location || '-'}</li>
-        <li><strong>No. of followers:</strong> {data.followers || '-'}</li>
-        <li><strong>No. of following:</strong> {data.following || '-'}</li>
-        <li><strong>No. of public repositories:</strong> {data.public_repos || '-'}</li>
-        <li><strong>Twitter Handle:</strong> {data.twitter_username || '-'}</li>
-        <li><strong>Blog:</strong> {data.blog || '-'}</li>
+    <div className="userDetailContainer">
+      <div className="userDetail">
+        <UserAvatar profilePicture={data.avatar_url} loginName={data.login}  avatarName={data.name} />
+        {detailItem.map(item => (
+          <div className="itemContainer">
+            <div className="labelContainer">{item.label}</div>
+            <div>{item.value}</div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

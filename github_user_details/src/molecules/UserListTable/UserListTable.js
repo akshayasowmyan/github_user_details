@@ -7,10 +7,11 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import { columns } from './UserList.config';
+import './style.css';
 
 const UserListTable = ({ data, handleRowClick, rowsPerPage, page, handleChangePage, handleChangeRowsPerPage }) => {
   return (
-    <>
+    <div className="tableContainer">
       <Table>
         <TableHead>
           <TableRow>
@@ -37,7 +38,7 @@ const UserListTable = ({ data, handleRowClick, rowsPerPage, page, handleChangePa
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
-    </>
+    </div>
   );
 }
 

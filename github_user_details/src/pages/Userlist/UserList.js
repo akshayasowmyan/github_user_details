@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import UserListTable from '../../molecules/UserListTable/UserListTable';
+import './style.css';
 
 const UserList = () => {
   const navigate = useNavigate();
@@ -39,7 +40,7 @@ const UserList = () => {
 
   return (
     <>
-      <div>{title}</div>
+      <div className="titleContainer">{title}</div>
       <UserListTable 
         data={data} 
         handleRowClick={handleRowClick}
