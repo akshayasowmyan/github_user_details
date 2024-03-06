@@ -1,46 +1,53 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Avatar from '@mui/material/Avatar';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableRow from '@material-ui/core/TableRow';
+import { useNavigate } from 'react-router-dom';
+import UserListTable from '../../molecules/UserListTable/UserListTable';
 
-function UserList() {
+const UserList = () => {
+  const navigate = useNavigate();
   const title = 'GitHub User List';
   const [data, setData] = useState([]);
-
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
+  // const accessToken = process.env.REACT_APP_GITHUB_ACCESS_TOKEN;
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get('https://api.github.com/users');
-        setData(response.data);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-
     fetchData();
-  }, []);
+  }, [page, rowsPerPage]);
+
+
+  const fetchData = async () => {
+    try {
+      const { data } = await axios.get(`https://api.github.com/users?per_page=${rowsPerPage}&page=${page+1}`);
+      setData(data);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
 
   const handleRowClick = (rowData) => {
-    console.log('Clicked row data:', rowData);
-    // Handle row click, if needed
+    navigate(`/userDetails/${rowData.login}`);
+  };
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
   };
 
   return (
     <>
-    <div>{title}</div>
-    <Table>
-      <TableBody>
-        {data.map((row, index) => (
-          <TableRow key={index} onClick={() => handleRowClick(row)}>
-            <TableCell style={{ width: '100px' }}><Avatar alt={row.login} src={row.avatar_url} /></TableCell>
-            <TableCell>{row.login}</TableCell>
-          </TableRow>
-        ))}
-      </TableBody>
-    </Table>
+      <div>{title}</div>
+      <UserListTable 
+        data={data} 
+        handleRowClick={handleRowClick}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        handleChangePage={handleChangePage}
+        handleChangeRowsPerPage={handleChangeRowsPerPage}
+       />
     </>
   );
 }
