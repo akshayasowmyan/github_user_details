@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate} from 'react-router-dom';
 import logo from './logo.svg';
 import './App.css';
-import UserList from './pages/UserList';
+import UserList from './pages/Userlist';
 import UserDetails from './pages/UserDetails';
 function App() {
   return (
